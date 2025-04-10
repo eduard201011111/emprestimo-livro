@@ -1,4 +1,2 @@
-package com.example.emprestimo_livro.Service;
-
-public interface LivroService {
+package com.example.emprestimo_livro.Service;public class LivroService {
 }

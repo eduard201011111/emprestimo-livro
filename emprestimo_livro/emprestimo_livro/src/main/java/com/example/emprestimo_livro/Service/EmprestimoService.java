@@ -1,4 +1,2 @@
-package com.example.emprestimo_livro.Service;
-
-public interface EmprestimoService {
+package com.example.emprestimo_livro.Service;public class EmprestimoService {
 }
