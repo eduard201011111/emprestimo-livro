@@ -5,6 +5,7 @@ import com.example.emprestimo_livro.Entity.Livro;
 import com.example.emprestimo_livro.Repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 @Service
@@ -48,11 +49,15 @@ public class LivroService {
         return livroRepository.existsById(id);
     }
 
-    public boolean updateLivroNome(Long id, String novoNome) {
+    public boolean updateLivro(Long id, LivroDto livroDto) {
         Optional<Livro> livroOptional = livroRepository.findById(id);
         if (livroOptional.isPresent()) {
             Livro livro = livroOptional.get();
-            livro.setNome(novoNome);
+            livro.setNome(livroDto.getNome());
+            livro.setAutor(livroDto.getAutor());
+            livro.setIsbn(livroDto.getIsbn());
+            livro.setGenero(livroDto.getGenero());
+
             livroRepository.save(livro);
             return true;
         }
