@@ -22,7 +22,7 @@ public class Livro {
     private String genero;
 
     @ManyToOne
-    @JoinColumn(name = "emprestimo_id", referencedColumnName = "id")
+    @JoinColumn(name = "id_emprestimo", referencedColumnName = "id")
     @JsonBackReference
     private Emprestimo emprestimo;
 }

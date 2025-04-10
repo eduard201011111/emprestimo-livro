@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,16 +17,13 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany(mappedBy = "cliente")
-
-
-
     private long id;
     private String nome;
     private String sobrenome;
     private String cpf;
 
-
+    @OneToMany(mappedBy = "cliente")
+    private List<Emprestimo> emprestimo;
 
 
 
