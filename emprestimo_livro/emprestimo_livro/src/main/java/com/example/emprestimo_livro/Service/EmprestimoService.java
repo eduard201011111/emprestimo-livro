@@ -6,6 +6,9 @@ import com.example.emprestimo_livro.Entity.Emprestimo;
 import com.example.emprestimo_livro.Repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -24,7 +27,6 @@ public class EmprestimoService {
 
     public EmprestimoDtoResponse toDto(Emprestimo emprestimo) {
         EmprestimoDtoResponse emprestimoDtoResponse = new EmprestimoDtoResponse();
-        emprestimoDtoResponse.setId(emprestimo.getId());
         emprestimoDtoResponse.setId(emprestimo.getId());
         emprestimoDtoResponse.setData_inicial(emprestimo.getData_inicial());
         emprestimoDtoResponse.setData_final(emprestimo.getData_final());
@@ -46,13 +48,19 @@ public class EmprestimoService {
         return emprestimoRepository.existsById(id);
     }
 
-    public boolean updatedata_final(Long id, EmprestimoDtoRequest emprestimo1) {
+    public boolean updatedata_final(Long id, String novaDataFinal) {
         Optional<Emprestimo> emprestimoOptional = emprestimoRepository.findById(id);
         if (emprestimoOptional.isPresent()) {
             Emprestimo emprestimo = emprestimoOptional.get();
-            emprestimo.setData_final(emprestimo.getData_final());
-            emprestimoRepository.save(emprestimo);
-            return true;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate dataFinal = LocalDate.parse(novaDataFinal, formatter);
+                emprestimoRepository.save(emprestimo);
+                return true;
+            } catch (Exception e) {
+                // Se ocorrer algum erro ao converter a data, podemos capturá-lo aqui
+                return false;
+            }
         }
         return false;
     }
