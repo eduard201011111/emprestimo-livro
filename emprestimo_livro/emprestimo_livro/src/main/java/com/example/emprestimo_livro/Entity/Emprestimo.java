@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Emprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+
     @ManyToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
     @JsonBackReference
